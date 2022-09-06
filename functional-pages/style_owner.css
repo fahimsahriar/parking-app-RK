@@ -1,0 +1,43 @@
+
+.new_post{
+    display: none;
+    background: #fff;
+    width: 750px;
+    padding: 30px;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.6);
+}
+.new_post{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+}
+button .main{
+    color:#FFF;
+    font-weight: bold;
+}
+.close-button{
+    position: absolute;
+    right: 20px;
+    top: 10px;
+    cursor: pointer;
+}
+.show-btn{
+    background: #46da6b;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+#show:checked ~ .new_post{
+    z-index: 1;
+    display: block;
+
+}
+input[id="show"]{
+    display: none;
+}
+.heading{
+    background: burlywood;
+    margin-bottom: 20px;
+    padding: 10px;
+}
