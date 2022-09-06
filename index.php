@@ -10,6 +10,8 @@
 				<h1 style="font-weight: 300;">Parking shouldn’t be a hassle</h1>
 				<h4 style="font-weight: 300;">Get a trendy car parking website fitted with a powerful parking reservation system with all key features</h4>
 				<a href="#next"><button type="button" class="btn" style="background: #7d736c94;color:#fdea07;margin-top:20px">Explore more <i class="fas fa-chevron-down"></i></button></a>
+				<a href="functional-pages/registration-car.php"><button type="button" class="btn" style="background: #7d736c94;color:#fdea07;margin-top:20px">Get Started As Car Owner <i class="fas fa-arrow-right"></i></button></a>
+				<a href="functional-pages/registration-parking.php"><button type="button" class="btn" style="background: #7d736c94;color:#fdea07;margin-top:20px">Get Started As Parking Lot Owner <i class="fas fa-arrow-right"></i></button></a>
 			</div>
 		</div>
 	<!--2nd call-->

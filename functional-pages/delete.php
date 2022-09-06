@@ -14,7 +14,7 @@
     if(isset($_POST['submit'])){
         $sql = "DELETE FROM active WHERE id = '$id'";
         $conn->query($sql);
-        echo '<div style="text-align:center;padding:15px;"><p><i class="far fa-check-circle"></i> Successfully Deleted</p><a class="btn btn-success" href="owner_page.php" role="button">Back to Dashboard</a></div>';
+        echo '<div style="text-align:center;padding:15px;"><p><i class="far fa-check-circle"></i> Successfully Deleted</p><a class="btn btn-success" href="g-owner_page.php" role="button">Back to Dashboard</a></div>';
         die();
     }    
 ?>

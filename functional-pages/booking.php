@@ -24,7 +24,7 @@
         }
         $conn->query($sql);
         $conn->query($sql2);
-        echo '<div style="text-align:center;padding:15px;"><p><i class="far fa-check-circle"></i> Successfully Booked !!!</p><a class="btn btn-success" href="user_page.php" role="button">Back</a></div>';
+        echo '<div style="text-align:center;padding:15px;"><p><i class="far fa-check-circle"></i> Successfully Booked !!!</p><a class="btn btn-success" href="car-user_page.php" role="button">Back</a></div>';
         die();
     }
 ?>
