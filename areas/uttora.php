@@ -20,7 +20,7 @@
     </div>
     <?php 
         $location='Uttara';
-        $sql2 = "SELECT user_detail.fullName, active.location, active.space, active.id FROM active JOIN user_detail ON user_detail.username=active.username WHERE location='$location' ORDER BY date DESC";
+        $sql2 = "SELECT user_detail.fullName, active.location, active.space, active.id, active.username FROM active JOIN user_detail ON user_detail.username=active.username WHERE location='$location' ORDER BY date DESC";
         $result2 = $conn->query($sql2);
         $count2 = mysqli_num_rows($result2);
     ?>

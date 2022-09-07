@@ -1,13 +1,15 @@
 <?php require 'C:\xampp\htdocs\Dhaka-Parking\header.php'; ?>
 <?php include_once 'C:\xampp\htdocs\Dhaka-Parking\db_connect.php';
 
+    $renter_username = $_GET['renter_username'];
+    $customer_username = $_GET['customer_username'];
     $g_name = $_GET['g_name'];
     $c_name = $_GET['c_name'];
     $id = $_GET['id'];
     $space = $_GET['space'];
     $location = $_GET['location'];
     $i;
-
+    //echo $renter_username;
     // booking functions
     if(isset($_POST['submit'])){
         $number = $_POST['number']; 
@@ -17,10 +19,10 @@
 
         if($space<=0){
             $sql = "DELETE FROM `active` WHERE `active`.`id` = '$id'";
-            $sql2 = "INSERT INTO bookings (location, space, customer, renter, number ) VALUES ('$location', '$b_space','$c_name', '$g_name', '$number ')";
+            $sql2 = "INSERT INTO bookings (location, space, customer, renter, number ) VALUES ('$location', '$b_space','$customer_username', '$renter_username', '$number ')";
         }else{
             $sql = "UPDATE active SET space = '$space' WHERE id = '$id'";
-            $sql2 = "INSERT INTO bookings (location, space, customer, renter, number ) VALUES ('$location', '$b_space','$c_name', '$g_name', '$number ')";
+            $sql2 = "INSERT INTO bookings (location, space, customer, renter, number ) VALUES ('$location', '$b_space','$customer_username', '$renter_username', '$number ')";
         }
         $conn->query($sql);
         $conn->query($sql2);

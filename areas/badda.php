@@ -8,6 +8,11 @@
         header('location: logout.php');
         die(); 
     }
+    $c_name = $_SESSION['username'];
+    $sql3 = "SELECT fullName FROM user_detail WHERE username='$c_name'";
+    $result3 = $conn->query($sql3);
+    $row2 = $result3->fetch_assoc();
+    $customer_name = $row2['fullName'];
 ?>
 
 <div class="container">
@@ -16,7 +21,7 @@
     </div>
     <?php 
         $location='Badda';
-        $sql2 = "SELECT user_detail.fullName, active.location, active.space, active.id FROM active JOIN user_detail ON user_detail.username=active.username WHERE location='$location' ORDER BY date DESC";
+        $sql2 = "SELECT user_detail.fullName, active.location, active.space, active.id, active.username FROM active JOIN user_detail ON user_detail.username=active.username WHERE location='$location' ORDER BY date DESC";
         $result2 = $conn->query($sql2);
         $count2 = mysqli_num_rows($result2);
     ?>

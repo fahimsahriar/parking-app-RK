@@ -20,7 +20,7 @@
 
         $sql = "INSERT INTO active (location, space, username ) VALUES ('$location ', '$space','$username ')";
         $conn->query($sql);
-        header('location: owner_page.php');
+        header('location: g-owner_page.php');
     }    
 ?>
 <link rel="stylesheet" href="style_owner.css">

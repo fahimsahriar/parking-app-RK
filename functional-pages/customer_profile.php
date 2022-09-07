@@ -16,11 +16,14 @@
     $result1 = $conn->query($sql1);
     $row1 = $result1->fetch_assoc();
 
-    $sql2 = "SELECT * FROM bookings WHERE customer='$customer_name' AND complete='1' ORDER BY date DESC";
+    $customer_username = $row1['username'];
+    //echo $customer_username ;
+
+    $sql2 = "SELECT * FROM bookings WHERE customer='$customer_username' AND complete='1' ORDER BY date DESC";
     $result2 = $conn->query($sql2);
     $count2 = mysqli_num_rows($result2);
 
-    $sql3 = "SELECT *, user_detail.phone as ph FROM bookings JOIN user_detail on bookings.renter = user_detail.fullName WHERE bookings.customer='$customer_name' AND complete='0' ORDER BY date DESC";
+    $sql3 = "SELECT * FROM bookings JOIN user_detail ON bookings.customer = user_detail.username WHERE customer='$customer_username' AND complete='0' ORDER BY date DESC";
     $result3 = $conn->query($sql3);
     $count3 = mysqli_num_rows($result3);
 ?>
@@ -45,7 +48,7 @@
                         <p class="">Car: <?php echo $row2['space'] ?></p>
                         <hr class="my-4">
                         <p><i class="fa fa-user"></i> <?php echo $row2['renter'] ?></p>
-                        <p><i class="fa fa-phone"></i> <?php echo $row2['ph'] ?></p>
+                        <p><i class="fa fa-phone"></i> <?php echo $row2['number'] ?></p>
                         <p class="">Date: <?php echo $row2['date'] ?></p>
                         <p class="">
                             <a class="btn btn-success btn" href="complete.php?id=<?php echo $row2['id']?>" role="button">Marked as complete</a>
