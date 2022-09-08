@@ -17,7 +17,7 @@
     $result1 = $conn->query($sql1);
     $row1 = $result1->fetch_assoc();
 
-    $sql2 = "SELECT * FROM bookings JOIN user_detail on bookings.renter = user_detail.fullName  WHERE user_detail.username='$username' AND bookings.complete='1' ORDER BY date DESC";
+    $sql2 = "SELECT * FROM bookings JOIN user_detail on bookings.renter = user_detail.username  WHERE user_detail.username='$username' AND bookings.complete='1' ORDER BY date DESC";
     $result2 = $conn->query($sql2);
     $count2 = mysqli_num_rows($result2);
 ?>

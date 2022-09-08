@@ -33,7 +33,7 @@
                 <hr class="my-4">
                 <p><i class="fa fa-user"></i> <?php echo $row['fullName'] ?></p>
                 <p class="">
-                    <a class="btn btn-success btn" href="../functional-pages/booking.php?g_name=<?php echo $row['fullName']?>&c_name=<?php echo $customer_name?>&id=<?php echo $row['id']?>&space=<?php echo $row['space']?>&location=<?php echo $location ?>" role="button">Book</a>
+                <a class="btn btn-success btn" href="../functional-pages/booking.php?customer_username=<?php echo $c_name?>&renter_username=<?php echo $row['username']?>&g_name=<?php echo $row['fullName']?>&c_name=<?php echo $customer_name?>&id=<?php echo $row['id']?>&space=<?php echo $row['space']?>&location=<?php echo $location ?>" role="button">Book</a>
                 </p>
             </div>
         <?php } ?>

@@ -85,7 +85,8 @@
     <!--Booked Post  -->
     <h2 style="text-align:center;text-decoration:underline">Running Rent</h2>
     <?php 
-        $sql2 = "SELECT * FROM bookings JOIN user_detail on bookings.renter = user_detail.fullName  WHERE user_detail.username='$username' AND bookings.complete='0' ORDER BY date DESC";
+        echo $username;
+        $sql2 = "SELECT * FROM bookings JOIN user_detail on bookings.renter = user_detail.username  WHERE user_detail.username='$username' AND bookings.complete='0'";
         $result2 = $conn->query($sql2);
         $count2 = mysqli_num_rows($result2);
     ?>
