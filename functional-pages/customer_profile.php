@@ -51,7 +51,7 @@
                         <p><i class="fa fa-phone"></i> <?php echo $row2['number'] ?></p>
                         <p class="">Date: <?php echo $row2['date'] ?></p>
                         <p class="">
-                            <a class="btn btn-success btn" href="complete.php?id=<?php echo $row2['id']?>" role="button">Marked as complete</a>
+                            <a class="btn btn-success btn" href="complete.php?id=<?php echo $row2['id']?>&step=1" role="button">Marked as complete</a>
                         </p>
                     </div>
                 <?php } ?>
