@@ -9,8 +9,10 @@
     $result1 = $conn->query($sql1);
     $row = $result1->fetch_assoc();
 
-    $mysqltime = date ('Y-m-d H:i:s', $row['date']);
-    echo $mysqltime;
+    //$raw_date = date ('Y-m-d H:i:s', $row['date']);
+    $date1 = ( new DateTime($row['date']) )->format('d M Y');
+    //echo $date1;
+
 
 ?>
 
@@ -30,14 +32,14 @@
                     <div class="card-body">
                         <div class="mb-3 d-flex justify-content-between">
                             <div>
-                                <span class="me-3"><?php echo $row['date'] ?></span>
+                                <span class="me-3"><?php echo $date1 ?></span>
                                 <span class="me-3">bk-id-<?php echo $id ?></span>
                                 <span class="badge rounded-pill bg-info">
                                     <?php
-                                        if($row['complete']!=2){
-                                            ?>Status: Pending<?php
-                                        }else{
+                                        if(((int)$row['complete'])==2){
                                             ?>Complete<?php
+                                        }else{
+                                            ?>Status: Pending<?php
                                         }
                                     ?>
                                 </span>
