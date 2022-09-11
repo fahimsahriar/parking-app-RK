@@ -32,12 +32,12 @@
             <h3 style='font-weight:300;text-decoration:underline'>Completed Bookings  </h3>
             <?php if($count2>0){ ?>
                 <?php while($row = $result2->fetch_assoc()){ ?>
-                    <div class="" style="background:#6f8e7a;padding:20px; margin-bottom:15px;color:white;">
-                        <h3 class="">Empty Space Rented in <?php echo $row['location'] ?> </h3>
-                        <p><i class="fa fa-user"></i> <?php echo $row['customer'] ?></p>
-                        <p><i class="fa fa-phone"></i> <?php echo $row['number'] ?></p>
+                    <div class="" style="background:#1e7e347d;padding:20px; margin-bottom:15px;color:#000;">
+                        <h5 style='font-weight:500;'><a style="color:#000;" href="booking-detail.php?id=<?php echo $row['id'] ?>" >bk-id-<?php echo $row['id'] ?></a></h5>
+                        <p class="">Location: <?php echo $row['location'] ?> | Car: <?php echo $row['space'] ?></p>
+
                         <hr class="my-4">
-                        <p class="">Space: <?php echo $row['space'] ?> Car</p>
+                        <p><i class="fa fa-user"></i> <?php echo $row['renter'] ?> <i class="ml-5 fa fa-phone"></i> <?php echo $row['number'] ?> </p>
                         <p class="">Date: <?php echo $row['date'] ?></p>
                     </div>
                 <?php } ?>

@@ -1,0 +1,34 @@
+body{
+    font-family: 'Nunito', sans-serif;
+}
+.cover{
+    width: 100%;
+    height: 90vh;
+	background:linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)),url(images/back-img.jpg);
+    background-size: cover;
+}
+.content-area{
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.content{
+    color: #fff;
+}
+.head2{
+    height: 30%;
+    display: flex;
+    background:#343A40;
+    color: #fff;
+    justify-content: center;
+    align-items: center;
+}
+.row{
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+.navbar-brand{
+    font-size: 1.5rem;
+    font-family: system-ui;
+}
