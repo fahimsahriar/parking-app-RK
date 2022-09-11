@@ -51,7 +51,7 @@ if (isset($_POST['submit'])) {
 
             <div class="clear"></div>
             <hr class="survey-hr">
-            <button type="submit" name="submit" style="background:#43a7d5;color:#fff;padding:12px;border:0" >Submit your review</button>
+            <button type="submit" name="submit" class="btn btn-success btn">Submit your review</button>
         </form>
     </div>
     <!--<form method="POST">
