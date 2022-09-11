@@ -1,6 +1,8 @@
 <?php require 'C:\xampp\htdocs\Dhaka-Parking\header.php'; ?>
 <?php include_once 'C:\xampp\htdocs\Dhaka-Parking\db_connect.php';
 
+    #little
+
     $renter_username = $_GET['renter_username'];
     $customer_username = $_GET['customer_username'];
     $g_name = $_GET['g_name'];
