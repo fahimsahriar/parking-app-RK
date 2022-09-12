@@ -18,6 +18,11 @@
     $result2 = $conn->query($sql2);
     $row2 = $result2->fetch_assoc();
 
+    $customer = $row['customer'];
+    $sql3 = "SELECT * FROM user_detail WHERE username = '$customer'";
+    $result3 = $conn->query($sql3);
+    $row3 = $result3->fetch_assoc();
+
 
 ?>
 
@@ -38,7 +43,6 @@
                         <div class="mb-3 d-flex justify-content-between">
                             <div>
                                 <span class="me-3"><?php echo $date1 ?></span>
-                                <span class="me-3">bk-id-<?php echo $id ?></span>
                                 <span class="badge rounded-pill bg-info">
                                     <?php
                                         if(((int)$row['complete'])==2){
@@ -74,7 +78,7 @@
                                     <td class="text-end">0.00 tk</td>
                                 </tr>
                                 <tr>
-                                    <td colspan="2">Discount (Code: NEWYEAR)</td>
+                                    <td colspan="2">Discount</td>
                                     <td class="text-danger text-end">0 tk</td>
                                 </tr>
                                 <tr class="fw-bold">
@@ -97,10 +101,9 @@
                             <div class="col-lg-6">
                                 <h3 class="h6">Billing address</h3>
                                 <address>
-                                    <strong>Car Owner</strong><br>
-                                    1355 Market St, Suite 900<br>
+                                    <strong><?php echo $row3['fullName'] ?></strong><br>
                                     San Francisco, CA 94103<br>
-                                    <abbr title="Phone">P:</abbr> (123) 456-7890
+                                    <abbr title="Phone">P:</abbr><?php echo $row3['phone'] ?>
                                 </address>
                             </div>
                         </div>
@@ -115,7 +118,6 @@
                         <hr>
                         <address>
                             <strong><?php echo $row2['fullName'] ?></strong><br>
-                            1355 Market St, Suite 900<br>
                             San Francisco, CA 94103<br>
                             <abbr title="Phone">Phone: </abbr> <?php echo $row2['phone'] ?>
                         </address>

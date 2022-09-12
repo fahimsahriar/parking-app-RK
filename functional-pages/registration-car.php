@@ -15,6 +15,7 @@ if (isset($_POST['submit'])) {
     $Model = $_POST['Model'];
     $Registration_NO = $_POST['Registration_NO'];
     $phone = $_POST['phone'];
+    $address = $_POST['address'];
     $r = 2;
 
     $sql2 = "SELECT * FROM user_detail WHERE username='$username'";
@@ -23,7 +24,7 @@ if (isset($_POST['submit'])) {
     if ($count > 0) {
         $error = '* Already have an account using this username <a href="../functional-pages/login-car.php">Login</a>';
     } else {
-        $sql = "INSERT INTO user_detail (username, pass,phone, role1, fullName, NID, Car_Name, Model, Registrations_NO ) VALUES ('$username', '$password','$phone' ,'$r', '$fullName', '$nid', '$Car_Name', '$Model',   '$Registration_NO')";
+        $sql = "INSERT INTO user_detail (username, pass,phone, role1, fullName, NID, Car_Name, Model, Registrations_NO,address ) VALUES ('$username', '$password','$phone' ,'$r', '$fullName', '$nid', '$Car_Name', '$Model',   '$Registration_NO','$address')";
         $conn->query($sql);
         $error = 'Account created succesfully <a href="../functional-pages/login-car.php">Login</a>';
     }
@@ -64,6 +65,10 @@ if (isset($_POST['submit'])) {
             <div class="form-group col-md-6">
                 <label for="inputPassword4">Password</label>
                 <input type="password" name="pass" class="form-control" id="inputPassword4" placeholder="Password">
+            </div>
+            <div class="form-group col-md-6">
+                <label for="Address">Address</label>
+                <input type="text" name="address" class="form-control" id="Address" placeholder="Enter full address">
             </div>
         </div>
         <p style="color: red;"><?php echo "$error" ?></p>
