@@ -13,6 +13,11 @@
     $date1 = ( new DateTime($row['date']) )->format('d M Y');
     //echo $date1;
 
+    $renter = $row['renter'];
+    $sql2 = "SELECT * FROM user_detail WHERE username = '$renter'";
+    $result2 = $conn->query($sql2);
+    $row2 = $result2->fetch_assoc();
+
 
 ?>
 
@@ -21,7 +26,7 @@
     <div class="container">
         <!-- Title -->
         <div class="d-flex justify-content-between align-items-center py-3">
-            <h2 class="h5 mb-0"><a href="#" class="text-muted"></a> Booking #id-<?php echo $id ?></h2>
+            <h2 class="h5 mb-0" style="text-decoration: underline;"><a href="#" class="text-muted"></a> Booking #id-<?php echo $id ?></h2>
         </div>
 
         <!-- Main content -->
@@ -54,27 +59,27 @@
                                                 <img src="https://via.placeholder.com/280x280/FF69B4/000000" alt="" width="35" class="img-fluid">
                                             </div>
                                             <div class="flex-lg-grow-1 ms-3">
-                                                <h6 class="small mb-0"><?php echo $row['space'] ?> car in <?php echo $row['location'] ?></h6>
-                                                <span class="small">Duration: 4 hours</span>
+                                                <h6 class="small mb-0">Location: <?php echo $row['location'] ?></h6>
+                                                <span class="small">Duration: <?php echo $row['day'] ?> days, <?php echo $row['hour'] ?> hours</span>
                                             </div>
                                         </div>
                                     </td>
-                                    <td>1</td>
-                                    <td class="text-end">$79.99</td>
+                                    <td><?php echo $row['space'] ?> car</td>
+                                    <td class="text-end"><?php echo $row['cost'] ?> tk</td>
                                 </tr>
                             </tbody>
                             <tfoot>
                                 <tr>
                                     <td colspan="2">VAT</td>
-                                    <td class="text-end">$20.00</td>
+                                    <td class="text-end">0.00 tk</td>
                                 </tr>
                                 <tr>
                                     <td colspan="2">Discount (Code: NEWYEAR)</td>
-                                    <td class="text-danger text-end">-$10.00</td>
+                                    <td class="text-danger text-end">0 tk</td>
                                 </tr>
                                 <tr class="fw-bold">
                                     <td colspan="2">TOTAL</td>
-                                    <td class="text-end">$169,98</td>
+                                    <td class="text-end">BDT <?php echo $row['cost'] ?></td>
                                 </tr>
                             </tfoot>
                         </table>
@@ -86,13 +91,13 @@
                         <div class="row">
                             <div class="col-lg-6">
                                 <h3 class="h6">Payment Method</h3>
-                                <p>Visa -1234 <br>
-                                    Total: $169,98 <span class="badge bg-success rounded-pill">PAID</span></p>
+                                <p>BKash <br>
+                                    Total: BDT <?php echo $row['cost'] ?> <span class="badge bg-success rounded-pill">PAID</span></p>
                             </div>
                             <div class="col-lg-6">
                                 <h3 class="h6">Billing address</h3>
                                 <address>
-                                    <strong>John Doe</strong><br>
+                                    <strong>Car Owner</strong><br>
                                     1355 Market St, Suite 900<br>
                                     San Francisco, CA 94103<br>
                                     <abbr title="Phone">P:</abbr> (123) 456-7890
@@ -109,10 +114,10 @@
                         <h3 class="h6">Parking Owner Information</h3>
                         <hr>
                         <address>
-                            <strong>John Doe</strong><br>
+                            <strong><?php echo $row2['fullName'] ?></strong><br>
                             1355 Market St, Suite 900<br>
                             San Francisco, CA 94103<br>
-                            <abbr title="Phone">P:</abbr> (123) 456-7890
+                            <abbr title="Phone">Phone: </abbr> <?php echo $row2['phone'] ?>
                         </address>
                     </div>
                 </div>
