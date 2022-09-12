@@ -1,11 +1,11 @@
-    <div style="background:#343A40;width:100%;height:70px;">
-      <div class="" style="padding-top:20px;" >
+    <div id="" style="background:#343A40;">
+      <div class="foot" style="padding:20px;" >
         <p style="text-align: center;color:gray">
             <small>Thank you</small> <br>
             <small>All right rserves to us</small>
         </p>
       </div>
-  </div>
+    </div>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>

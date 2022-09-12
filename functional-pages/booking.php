@@ -11,7 +11,6 @@
     //echo $renter_username;
     // booking functions
     if(isset($_POST['submit'])){
-        $number = $_POST['phone-number'];
         $b_space = $_POST['space'];
         $space = $space - $b_space;
         $day = $_POST['duration-day'];
@@ -20,10 +19,10 @@
 
         if($space<=0){
             $sql = "DELETE FROM `active` WHERE `active`.`id` = '$id'";
-            $sql2 = "INSERT INTO bookings (location, space, customer, renter, number,day,hour,cost ) VALUES ('$location', '$b_space','$customer_username', '$renter_username', '$number ','$day','$hour','$total_cost')";
+            $sql2 = "INSERT INTO bookings (location, space, customer, renter,day,hour,cost ) VALUES ('$location', '$b_space','$customer_username', '$renter_username','$day','$hour','$total_cost')";
         }else{
             $sql = "UPDATE active SET space = '$space' WHERE id = '$id'";
-            $sql2 = "INSERT INTO bookings (location, space, customer, renter, number,day,hour,cost ) VALUES ('$location', '$b_space','$customer_username', '$renter_username', '$number','$day','$hour','$total_cost')";
+            $sql2 = "INSERT INTO bookings (location, space, customer, renter,day,hour,cost ) VALUES ('$location', '$b_space','$customer_username', '$renter_username','$day','$hour','$total_cost')";
         }
         $conn->query($sql);
         $conn->query($sql2);
@@ -50,10 +49,6 @@
         </div>
     <hr>
     <form method="POST" class="">
-        <div class="form-group ">
-            <label for="exampleFormControlInput1">Phone Number</label>
-            <input class="form-control" type="phone" class="form-control" name="phone-number"  placeholder="Here, enter your cell number, where parking owner can call you">
-        </div>
         <div class="form-group">
             <label for="exampleFormControlSelect1">Select Space</label>
             <select onchange="qf()" id="drop" class="form-control form-control-sm" name="space">

@@ -30,35 +30,7 @@ if (isset($_POST['submit'])) {
 <div class="container">
     <!-- running posts -->
     <h2 style="text-align:center;text-decoration:underline">Running Advertise</h2>
-    <input type="checkbox" id="show">
-    <label for="show" class="show-btn">Create A New Advertise</label>
-    <div class="container new_post" id="hellp">
-        <label for="show" class="close-button">Close</label>
-        <h3>Creating a new Post</h3>
-        <form method="POST">
-            <div class="form-group">
-                <label for="exampleFormControlSelect1">Select Location</label>
-                <select class="form-control" name="location" id="exampleFormControlSelect1">
-                    <option value="Notun Bazar">Notun Bazar</option>
-                    <option value="Badda">Badda</option>
-                    <option value="Gulsan">Gulsan</option>
-                    <option value="Banani">Banani</option>
-                    <option value="Uttara">Uttara</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="exampleFormControlSelect1">Empty space in your garage</label>
-                <select class="form-control" name="space" id="exampleFormControlSelect1">
-                    <option>1 car</option>
-                    <option>2 car</option>
-                    <option>3 car</option>
-                    <option>4 car</option>
-                    <option>5 car</option>
-                </select>
-            </div>
-            <button type="submit" name="submit" class="btn btn-primary">Submit</button>
-        </form>
-    </div>
+    <a class="show-btn" href="new-advertise.php">Create A New Advertise</a>
     <?php
     $sql2 = "SELECT user_detail.fullName, active.location, active.space,active.id FROM active JOIN user_detail ON user_detail.username=active.username WHERE active.username='$username' ORDER BY date DESC";
     $result2 = $conn->query($sql2);
