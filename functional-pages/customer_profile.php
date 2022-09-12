@@ -19,7 +19,7 @@ $row1 = $result1->fetch_assoc();
 $customer_username = $row1['username'];
 //echo $customer_username ;
 
-$sql2 = "SELECT * FROM bookings WHERE customer='$customer_username' AND complete='1' ORDER BY date DESC";
+$sql2 = "SELECT * FROM bookings WHERE customer='$customer_username' AND complete='2' ORDER BY date DESC";
 $result2 = $conn->query($sql2);
 $count2 = mysqli_num_rows($result2);
 

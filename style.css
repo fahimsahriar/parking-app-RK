@@ -13,6 +13,15 @@ body{
     justify-content: center;
     align-items: center;
 }
+.container{
+    height: 100vh;
+  width: 100vw;
+}
+/*.foot {
+    display : table-row;
+    vertical-align : bottom;
+    height : 1px;
+}*/
 .content{
     color: #fff;
 }
