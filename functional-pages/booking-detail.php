@@ -27,7 +27,6 @@
 ?>
 
 <div class="container-fluid">
-
     <div class="container">
         <!-- Title -->
         <div class="d-flex justify-content-between align-items-center py-3">
@@ -48,7 +47,7 @@
                                         if(((int)$row['complete'])==2){
                                             ?>Complete<?php
                                         }else{
-                                            ?>Status: Pending<?php
+                                            ?>Status: Booked<?php
                                         }
                                     ?>
                                 </span>
@@ -102,8 +101,8 @@
                                 <h3 class="h6">Billing address</h3>
                                 <address>
                                     <strong><?php echo $row3['fullName'] ?></strong><br>
-                                    San Francisco, CA 94103<br>
-                                    <abbr title="Phone">P:</abbr><?php echo $row3['phone'] ?>
+                                    <?php echo $row3['address'] ?><br>
+                                    <abbr title="Phone">Phone: </abbr><?php echo $row3['phone'] ?>
                                 </address>
                             </div>
                         </div>
@@ -118,7 +117,7 @@
                         <hr>
                         <address>
                             <strong><?php echo $row2['fullName'] ?></strong><br>
-                            San Francisco, CA 94103<br>
+                            <?php echo $row2['address'] ?><br>
                             <abbr title="Phone">Phone: </abbr> <?php echo $row2['phone'] ?>
                         </address>
                     </div>
