@@ -4,8 +4,10 @@ $post_data['store_id'] = "parki631a4a1643045";
 $post_data['store_passwd'] = "parki631a4a1643045@ssl";
 $post_data['total_amount'] = $_GET['price'];
 $post_data['currency'] = "BDT";
+
 $post_data['tran_id'] = "SSLCZ_TEST_" . uniqid();
 $post_data['success_url'] = "http://www.fahim.com/Dhaka-Parking/functional-pages/success.php";
+
 $post_data['fail_url'] = "http://localhost/new_sslcz_gw/fail.php";
 $post_data['cancel_url'] = "http://localhost/new_sslcz_gw/cancel.php";
 # $post_data['multi_card_name'] = "mastercard,visacard,amexcard";  # DISABLE TO DISPLAY ALL AVAILABLE
@@ -44,10 +46,10 @@ $post_data['value_d'] = "ref004";
 
 # CART PARAMETERS
 $post_data['cart'] = json_encode(array(
-    array("product" => "DHK TO BRS AC A1", "amount" => "200.00"),
-    array("product" => "DHK TO BRS AC A2", "amount" => "200.00"),
-    array("product" => "DHK TO BRS AC A3", "amount" => "200.00"),
-    array("product" => "DHK TO BRS AC A4", "amount" => "200.00")
+    array("product"=>"DHK TO BRS AC A1","amount"=>"200.00"),
+    array("product"=>"DHK TO BRS AC A2","amount"=>"200.00"),
+    array("product"=>"DHK TO BRS AC A3","amount"=>"200.00"),
+    array("product"=>"DHK TO BRS AC A4","amount"=>"200.00")
 ));
 $post_data['product_amount'] = "100";
 $post_data['vat'] = "5";
@@ -67,29 +69,28 @@ curl_setopt($handle, CURLOPT_POSTFIELDS, $post_data);
 curl_setopt($handle, CURLOPT_RETURNTRANSFER, true);
 curl_setopt($handle, CURLOPT_SSL_VERIFYPEER, FALSE); # KEEP IT FALSE IF YOU RUN FROM LOCAL PC
 
-
-$content = curl_exec($handle);
+$content = curl_exec($handle );
 
 $code = curl_getinfo($handle, CURLINFO_HTTP_CODE);
 
-if ($code == 200 && !(curl_errno($handle))) {
-    curl_close($handle);
-    $sslcommerzResponse = $content;
+if($code == 200 && !( curl_errno($handle))) {
+	curl_close( $handle);
+	$sslcommerzResponse = $content;
 } else {
-    curl_close($handle);
-    echo "FAILED TO CONNECT WITH SSLCOMMERZ API";
-    exit;
+	curl_close( $handle);
+	echo "FAILED TO CONNECT WITH SSLCOMMERZ API";
+	exit;
 }
 
 # PARSE THE JSON RESPONSE
-$sslcz = json_decode($sslcommerzResponse, true);
+$sslcz = json_decode($sslcommerzResponse, true );
 
-if (isset($sslcz['GatewayPageURL']) && $sslcz['GatewayPageURL'] != "") {
-    # THERE ARE MANY WAYS TO REDIRECT - Javascript, Meta Tag or Php Header Redirect or Other
-    # echo "<script>window.location.href = '". $sslcz['GatewayPageURL'] ."';</script>";
-    echo "<meta http-equiv='refresh' content='0;url=" . $sslcz['GatewayPageURL'] . "'>";
-    # header("Location: ". $sslcz['GatewayPageURL']);
-    exit;
+if(isset($sslcz['GatewayPageURL']) && $sslcz['GatewayPageURL']!="" ) {
+        # THERE ARE MANY WAYS TO REDIRECT - Javascript, Meta Tag or Php Header Redirect or Other
+        # echo "<script>window.location.href = '". $sslcz['GatewayPageURL'] ."';</script>";
+	echo "<meta http-equiv='refresh' content='0;url=".$sslcz['GatewayPageURL']."'>";
+	# header("Location: ". $sslcz['GatewayPageURL']);
+	exit;
 } else {
-    echo "JSON Data parsing error!";
+	echo "JSON Data parsing error!";
 }
