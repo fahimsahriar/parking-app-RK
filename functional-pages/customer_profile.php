@@ -47,7 +47,6 @@ $count3 = mysqli_num_rows($result3);
                     <p class="">Location: <?php echo $row2['location'] ?> | Car: <?php echo $row2['space'] ?></p>
 
                     <hr class="my-4">
-                    <p><i class="fa fa-user"></i> <?php echo $row2['renter'] ?> <i class="ml-5 fa fa-phone"></i> <?php echo $row2['number'] ?> </p>
                     <p class="">Date: <?php echo $row2['date'] ?></p>
                     <p class="">
                         <a class="btn btn-success btn" href="complete.php?id=<?php echo $row2['id'] ?>&step=1" role="button">Marked as complete</a>
@@ -71,7 +70,6 @@ $count3 = mysqli_num_rows($result3);
                         <h5 style='font-weight:500;'><a style="color:#000;" href="booking-detail.php?id=<?php echo $row['id'] ?> " >bk-id-<?php echo $row['id'] ?></a></h5>
                         <p class="">Location: <?php echo $row['location'] ?> | Car: <?php echo $row['space'] ?></p>
                         <hr class="my-4">
-                        <p><i class="fa fa-user"></i> <?php echo $row['renter'] ?></p>
                         <p class="">Date: <?php echo $row['date'] ?></p>
                     </div>
                 <?php } ?>
