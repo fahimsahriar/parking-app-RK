@@ -38,10 +38,10 @@ if($code == 200 && !( curl_errno($handle)))
 	$card_type = $result->card_type;
 
 	# EMI INFO
-	$emi_ instalment = $result->emi_instalment;
-	$emi_ amount = $result->emi_ amount;
-	$emi_description = $result->emi_description;
-	$emi_issuer = $result->emi_issuer;
+	#$emi_ instalment = $result->emi_instalment;
+	#$emi_ amount = $result->emi_ amount;
+	#$emi_description = $result->emi_description;
+	#$emi_issuer = $result->emi_issuer;
 
 	# ISSUER INFO
 	$card_no = $result->card_no;
