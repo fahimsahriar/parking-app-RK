@@ -21,7 +21,6 @@
 		  <a href="../areas/uttora.php"><li class="list-group-item">Uttara</li></a>
 		  <a href="../areas/badda.php"><li class="list-group-item">Badda</li></a>
 		</ul>
-    </form>
 	</div>
 
 <?php require 'C:\xampp\htdocs\Dhaka-Parking\footer.php'; ?>
