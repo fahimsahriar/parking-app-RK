@@ -1,7 +1,6 @@
-<?php require 'C:\xampp\htdocs\Dhaka-Parking\header-new.php'; ?>
-<?php
+<?php 
+require '../';
 $error = '';
-
 if (isset($_POST['submit'])) {
     $username = $_POST['username'];
     $password = $_POST['password'];
