@@ -12,14 +12,26 @@ if (!isset($_SESSION['isLogin'])) {
 <?php
 $id = $_GET['id'];
 $step = $_GET['step'];
+$username = $_SESSION['username'];
+$rating_sql = "SELECT rating FROM user_detail  WHERE username = '$username'";
+$total_rating = $conn->query($rating_sql);
+$total_rating_1 = $total_rating->fetch_assoc();
+$total_rating_string = $total_rating_1['rating'];
+$total_rating_int = (int)$total_rating_string;
+//echo $total_rating_1['rating'];
 if (isset($_POST['submit'])) {
-    $sql = "UPDATE bookings SET complete = '$step' WHERE id = '$id'";
-    $conn->query($sql);
+    $rating = $_POST['rating1'];
+    $total_rating_int  = ($rating + $total_rating_int)/2;
     if ($_SESSION['ROLE'] == '1') {
         $d_id = "garage_owner_profile.php";
+        $sql = "UPDATE bookings SET complete = '$step',customer_review='$rating' WHERE id = '$id'";
     } else {
         $d_id = "customer_profile.php";
+        $sql = "UPDATE bookings SET complete = '$step',renter_review='$rating' WHERE id = '$id'";
     }
+    $sql_rating_update = "UPDATE user_detail SET rating = '$total_rating_int'  WHERE username = '$username'";
+    $conn->query($sql_rating_update);
+    $conn->query($sql);
     $d_id = '<div style="text-align:center;padding:15px;"><p><i class="far fa-check-circle"></i>Thank you for having our service</p><a class="btn btn-success" href="'.$d_id;
     $d_id = $d_id.'" ';
     $d_id = $d_id.' role="button">Back to Dashboard</a></div>';
@@ -32,26 +44,22 @@ if (isset($_POST['submit'])) {
 ?>
 
 <div class="container" style="margin-bottom: 80px;">
-    <div class="feedback">
-        <p>Dear Customer,<br>
-            Thank you for getting your car services at our workshop. We would like to know how we performed. Please spare some moments to give us your valuable feedback as it will help us in improving our service.</p>
-
-        <h4>Please rate your service experience and complete the booking</h4>
-
+    <div class="feedback" style="margin-top: 30px;">
+        <h4>Rate and complete the booking</h4>
+        <hr>
         <form method="post">
-            <label>1. Your overall experience with the person ?</label><br>
-
+            <label>Your overall experience with the person ?</label><br>
             <span class="star-rating">
-                <input type="radio" name="rating1" value="1"><i></i>
-                <input type="radio" name="rating1" value="2"><i></i>
-                <input type="radio" name="rating1" value="3"><i></i>
-                <input type="radio" name="rating1" value="4"><i></i>
-                <input type="radio" name="rating1" value="5"><i></i>
+                <input type="radio" name="rating1" value="1"><i class="fa fa-star">1</i>
+                <input type="radio" name="rating1" value="2"><i class="fa fa-star">2</i>
+                <input type="radio" name="rating1" value="3"><i class="fa fa-star">3</i>
+                <input type="radio" name="rating1" value="4"><i class="fa fa-star">4</i>
+                <input type="radio" name="rating1" value="5"><i class="fa fa-star">5</i>
             </span>
 
             <div class="clear"></div>
             <hr class="survey-hr">
-            <button type="submit" name="submit" class="btn btn-success btn">Submit your review</button>
+            <button type="submit" name="submit" class="btn btn-success btn">Submit Rating</button>
         </form>
     </div>
     <!--<form method="POST">

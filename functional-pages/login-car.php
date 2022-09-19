@@ -1,6 +1,7 @@
 <?php require 'C:\xampp\htdocs\Dhaka-Parking\header.php'; ?>
 <?php
 $error = '';
+
 if (isset($_POST['submit'])) {
     $username = $_POST['username'];
     $password = $_POST['password'];
@@ -25,9 +26,10 @@ if (isset($_POST['submit'])) {
     }
 }
 ?>
-<div class="container justify-content-center" style="margin-top: 3%;margin-bottom:100px">
+<div class="container justify-content-center" style="padding:10px; margin-top: 3%;margin-bottom:100px;width:50%">
     <form method="post" class="border p-3 rounded shadow">
         <h2 style="text-align:center">Car Owner Sign In</h2>
+        <hr>
         <div class="form-group">
             <label for="exampleInputEmail1">Username</label>
             <input type="username" class="form-control" name="username" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter username">
@@ -38,6 +40,7 @@ if (isset($_POST['submit'])) {
         </div>
         <button type="submit" class="btn btn-success" name="submit">Login</button>
         <p><?php echo "$error" ?></p>
+        <hr>
         <p><a href="../functional-pages/registration-car.php">Create New Account</a></p>
     </form>
 </div>

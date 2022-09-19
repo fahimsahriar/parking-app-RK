@@ -13,19 +13,19 @@
     $username = $_SESSION['username'];
 
     if (isset($_POST['submit'])) {
-        $location = $_POST['location'];
-        $space = $_POST['space'];
-
-        $sql = "INSERT INTO active (location, space, username ) VALUES ('$location ', '$space','$username ')";
+        $sql = "UPDATE bookings SET accept=1 WHERE ";
         $conn->query($sql);
         header('location: g-owner_page.php');
     }
     $sql2 = "SELECT user_detail.fullName, active.location, active.space,active.id FROM active JOIN user_detail ON user_detail.username=active.username WHERE active.username='$username' ORDER BY date DESC";
     $result2 = $conn->query($sql2);
     $count2 = mysqli_num_rows($result2);
-    $sql2 = "SELECT * FROM bookings JOIN user_detail on bookings.renter = user_detail.username  WHERE user_detail.username='$username' AND bookings.complete<>'2'";
+    $sql2 = "SELECT * FROM bookings JOIN user_detail ON user_detail.username=bookings.renter WHERE renter='$username' AND accept='0' ORDER BY date DESC";
     $result3 = $conn->query($sql2);
     $count3 = mysqli_num_rows($result3);
+    $sql3 = "SELECT * FROM bookings JOIN user_detail ON user_detail.username=bookings.renter WHERE renter='$username' AND accept='1' ORDER BY date DESC";
+    $result4 = $conn->query($sql3);
+    $count4 = mysqli_num_rows($result4);
 ?>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css" integrity="sha256-2XFplPlrFClt0bIdPgpz8H7ojnk10H69xRqd9+uTShA=" crossorigin="anonymous" />
 
@@ -42,6 +42,9 @@
                     <div class="card-body">
                         <div class="text-muted h4"><?php echo $count2 ?> Running</div>
                         <div class="h3">Advertisement</div>
+                        <a class="text-arrow-icon small text-primary" href="g-owner_page.php">
+                            See Advertisement
+                        </a>
                     </div>
                 </div>
             </div>
@@ -61,18 +64,15 @@
                 <!-- Billing card 3-->
                 <div class="card h-100 border-start-lg border-start-success">
                     <div class="card-body">
-                        <div class="text-muted h4">8 Booking</div>
+                        <div class="text-muted"><?php echo $count3 ?> Booking</div>
                         <div class="h3 d-flex align-items-center">Request</div>
-                        <a class="text-arrow-icon small text-secondary" href="booking-request.php">
-                            See Rents
-                        </a>
                     </div>
                 </div>
             </div>
         </div>
         <!-- Billing history card-->
         <div class="card mb-4">
-            <div class="card-header">Advertisement History</div>
+            <div class="card-header">Booking Requests</div>
             <div class="card-body p-0">
                 <!-- Billing history table-->
                 <div class="table-responsive table-billing-history">
@@ -81,21 +81,25 @@
                             <tr>
                                 <th class="border-gray-200" scope="col">ID</th>
                                 <th class="border-gray-200" scope="col">Location</th>
+                                <th class="border-gray-200" scope="col">Customer Detail</th>
                                 <th class="border-gray-200" scope="col">Space</th>
                                 <th class="border-gray-200" scope="col">Edit</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <?php if ($count2 > 0) { ?>
-                            <?php while ($row = $result2->fetch_assoc()) { ?>
+                            <?php if ($count3 > 0) { ?>
+                            <?php while ($row = $result3->fetch_assoc()) { ?>
                             <tr>
-                                <td>#ad-id-<?php echo $row['id'] ?></td>
+                                <td>#bk-id-<?php echo $row['id'] ?></td>
                                 <td> <?php echo $row['location'] ?></td>
+                                <td><a href="../functional-pages/user-profile.php?username=<?php echo $row['customer'] ?>">Click to See</a></td>
                                 <td><?php echo $row['space'] ?> car</td>
                                 <td>
                                     <span class="badge bg-light text-dark">
-                                        <a class="" href="edit.php?id=<?php echo $row['id'] ?>" role="button">Click to edit</a>  /
-                                        <a style="color:red;" href="delete.php?id=<?php echo $row['id'] ?>" role="button">Delete</a>
+                                        <form method="post" action="">
+                                            <a name="submit" style="color:green;" href="accept.php?id=<?php echo $row['id'] ?>&op=1" role="button">Accept</a>  /
+                                            <a name="submit1" style="color:red;" href="accept.php?id=<?php echo $row['id'] ?>&op=2" role="button">Reject</a>
+                                        </form>
                                     </span>
                                 </td>
                             </tr>

@@ -1,25 +1,37 @@
 <?php require 'header.php'; ?>
-	<!--Nav bar-->
+<?php
+    if (isset($_SESSION['isLogin'])) {
+		if(($_SESSION['ROLE'])==1)
+		{
+			header('location: functional-pages/g-owner_page.php');
+		}
+		elseif(($_SESSION['ROLE'])==2){
+			header('location: functional-pages/customer_profile.php');
+		}
+        die();
+    }
+?>
+<!--Nav bar-->
 
-	<!--home page-->
+<!--home page-->
 
-	<!--Welcoming page-->
-	<div class="cover">
-		<div class="content-area">
-			<div class="content">
-				<h1 style="font-weight: 300;">Parking shouldn’t be a hassle</h1>
-				<h4 style="font-weight: 300;">Get a trendy car parking website fitted with a powerful parking reservation system with all key features</h4>
-				<a href="#next"><button type="button" class="btn" style="background: #7d736c94;color:#fdea07;margin-top:20px">Explore more <i class="fas fa-chevron-down"></i></button></a>
-				<a href="functional-pages/registration-car.php"><button type="button" class="btn" style="background: #7d736c94;color:#fdea07;margin-top:20px">Get Started As Car Owner <i class="fas fa-arrow-right"></i></button></a>
-				<a href="functional-pages/registration-parking.php"><button type="button" class="btn" style="background: #7d736c94;color:#fdea07;margin-top:20px">Get Started As Parking Lot Owner <i class="fas fa-arrow-right"></i></button></a>
-			</div>
+<!--Welcoming page-->
+<div class="cover">
+	<div class="content-area">
+		<div class="content">
+			<h1 style="font-weight: 300;">Parking shouldn’t be a hassle</h1>
+			<h4 style="font-weight: 300;">Get a trendy car parking website fitted with a powerful parking reservation system with all key features</h4>
+			<a href="#next"><button type="button" class="btn" style="background: #7d736c94;color:#fdea07;margin-top:20px">Explore more <i class="fas fa-chevron-down"></i></button></a>
+			<a href="functional-pages/registration-car.php"><button type="button" class="btn" style="background: #7d736c94;color:#fdea07;margin-top:20px">Get Started As Car Owner <i class="fas fa-arrow-right"></i></button></a>
+			<a href="functional-pages/registration-parking.php"><button type="button" class="btn" style="background: #7d736c94;color:#fdea07;margin-top:20px">Get Started As Parking Lot Owner <i class="fas fa-arrow-right"></i></button></a>
 		</div>
+	</div>
 	<!--2nd call-->
-	<div class="head2" id="next">
+	<div class="head2 container1" id="next">
 		<h2 style="font-weight: 300;">We can answer your two important question</h2>
 	</div>
-	<div class="container head3">
-		<div class="row" style="padding-bottom: 30px;padding-top: 30px;">
+	<div class="container1 head3">
+		<div class="row" style="padding-top: 30px;">
 			<div class="col" style="padding-top: 30px;">
 				<h3 style="font-weight: 400;">Looking for parking space?</h3>
 				<hr>
@@ -37,8 +49,8 @@
 	</div>
 	<!--4rd call-->
 	<div style="background: #343A40;color:#fff">
-		<div class="container head3" style="padding-bottom: 30px;">
-			<div class="row" >
+		<div class="container1 head3">
+			<div class="row">
 				<div class="col">
 					<img src="images/empty_g.jpg" style="width:70%;padding-top: 30px;" alt="">
 				</div>
@@ -55,13 +67,13 @@
 			</div>
 		</div>
 	</div>
-	<div class="container" style="margin-top:30px">
-		<h2 style="font-weight: 300; text-align:center">Get started with Smart Parking, the trendiest parking system </h2>
+	<div class="container1" style="margin-top:30px">
+		<h2 style="font-weight: 300; text-align:left">Get started with Smart Parking, the trendiest parking system </h2>
 		<hr>
 	</div>
-	<div class="container head3">
+	<div class="container1 head3">
 		<div class="row">
-			<div class="col" style="padding-top: 30px;padding-bottom: 50px;text-align:center">
+			<div class="col" style="padding-top: 30px;text-align:left">
 				<ul>
 					<li style="font-size: 1.3em;font-weight:300;margin-bottom:20px;">Best for travelar, who can rent per night</li>
 					<li style="font-size: 1.3em;font-weight:300;margin-bottom:20px">Instant searching by location</li>
@@ -70,7 +82,16 @@
 				</ul>
 				<a href="../Dhaka-Parking/functional-pages/regi.php"><button class="btn btn-success" style="margin-top: 20px;">Get Started</button></a>
 			</div>
+			<div class="col" style="padding-top: 30px;text-align:left">
+				<img src="images/money.png" style="width:70%" alt="">
+			</div>
 		</div>
 	</div>
+	<style>
+		.container1{
+			padding-right: 100px;
+			padding-left: 100px;
+		}
+	</style>
 
-<?php require 'footer.php'; ?>
+	<?php require 'footer.php'; ?>

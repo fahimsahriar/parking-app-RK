@@ -1,44 +1,44 @@
 <?php
-    require '../header.php';
-    if (!isset($_SESSION['isLogin'])) {
-        header('location: login.php');
-        die();
-    }
-    $id = $_GET['id'];
-    $sql1 = "SELECT * FROM bookings WHERE id = '$id'";
-    $result1 = $conn->query($sql1);
-    $row = $result1->fetch_assoc();
+require '../header.php';
+if (!isset($_SESSION['isLogin'])) {
+    header('location: login.php');
+    die();
+}
+$id = $_GET['id'];
+$sql1 = "SELECT * FROM bookings WHERE id = '$id'";
+$result1 = $conn->query($sql1);
+$row = $result1->fetch_assoc();
 
-    //$raw_date = date ('Y-m-d H:i:s', $row['date']);
-    $date1 = ( new DateTime($row['date']) )->format('d M Y');
-    //echo $date1;
+//$raw_date = date ('Y-m-d H:i:s', $row['date']);
+$date1 = (new DateTime($row['date']))->format('d M Y');
+//echo $date1;
 
-    //parking owner information gethering
-    $renter = $row['renter'];
-    $sql2 = "SELECT * FROM user_detail WHERE username = '$renter'";
-    $result2 = $conn->query($sql2);
-    $row2 = $result2->fetch_assoc();
+//parking owner information gethering
+$renter = $row['renter'];
+$sql2 = "SELECT * FROM user_detail WHERE username = '$renter'";
+$result2 = $conn->query($sql2);
+$row2 = $result2->fetch_assoc();
 
-    //car owner information gethering
-    $customer = $row['customer'];
-    $sql3 = "SELECT * FROM user_detail WHERE username = '$customer'";
-    $result3 = $conn->query($sql3);
-    $row3 = $result3->fetch_assoc();
+//car owner information gethering
+$customer = $row['customer'];
+$sql3 = "SELECT * FROM user_detail WHERE username = '$customer'";
+$result3 = $conn->query($sql3);
+$row3 = $result3->fetch_assoc();
 
-    //chatting related sql query
-    $role = $_SESSION['ROLE'];
-    if (isset($_POST['submit'])) {
-        $message = $_POST['msg'];
-        $sql4 = "INSERT INTO messages(booking_id,role,message) VALUES('$id','$role', '$message') ";
-        $conn->query($sql4);
-        //echo $message;
-    }
+//chatting related sql query
+$role = $_SESSION['ROLE'];
+if (isset($_POST['submit'])) {
+    $message = $_POST['msg'];
+    $sql4 = "INSERT INTO messages(booking_id,role,message) VALUES('$id','$role', '$message') ";
+    $conn->query($sql4);
+    //echo $message;
+}
 
-    //chating history related query
-    $sql5 = "SELECT * FROM messages WHERE booking_id = '$id'";
-    $result4 = $conn->query($sql5);
-    //$count = $result4->fetch_assoc();
-    $count3 = mysqli_num_rows($result4);
+//chating history related query
+$sql5 = "SELECT * FROM messages WHERE booking_id = '$id'";
+$result4 = $conn->query($sql5);
+//$count = $result4->fetch_assoc();
+$count3 = mysqli_num_rows($result4);
 
 
 ?>
@@ -61,12 +61,14 @@
                                 <span class="me-3"><?php echo $date1 ?></span>
                                 <span class="badge rounded-pill bg-info">
                                     <?php
-                                        if(((int)$row['complete'])==2){
-                                            ?>Complete<?php
-                                        }else{
-                                            ?>Status: Booked<?php
-                                        }
-                                    ?>
+                                    if (((int)$row['complete']) == 2) {
+                                    ?>Complete<?php
+                                                    } elseif((int)$row['complete'] == 1) {
+                                                    ?>Status: Booked<?php }elseif((int)$row['accept'] == 1){?>
+                                                    Accepted
+                                                    <?php }elseif((int)$row['accept'] == 2){ ?> Rejected
+                                                    <?php }else{ ?>Pending
+                                                    <?php } ?>      
                                 </span>
                             </div>
                         </div>
@@ -117,7 +119,7 @@
                             <div class="col-lg-6">
                                 <h3 class="h6">Billing address</h3>
                                 <address>
-                                    <strong><?php echo $row3['fullName'] ?></strong><br>
+                                    <strong><a href="../functional-pages/user-profile.php?username=<?php echo $row3['username'] ?>"><?php echo $row3['fullName'] ?></a></strong><br>
                                     <?php echo $row3['address'] ?><br>
                                     <abbr title="Phone">Phone: </abbr><?php echo $row3['phone'] ?>
                                 </address>
@@ -133,7 +135,7 @@
                         <h3 class="h6">Parking Owner Information</h3>
                         <hr>
                         <address>
-                            <strong><?php echo $row2['fullName'] ?></strong><br>
+                            <strong><a href="../functional-pages/user-profile.php?username=<?php echo $row2['username'] ?>"><?php echo $row2['fullName'] ?></a></strong><br>
                             <?php echo $row2['address'] ?><br>
                             <abbr title="Phone">Phone: </abbr> <?php echo $row2['phone'] ?>
                         </address>
@@ -142,65 +144,88 @@
                 <div class="col-lg-4" id="mess-icon" style="display:none;">
                     <button class="btn" onclick="openForm()">Chat <i class='fas fa-comment-dots'></i></button>
                 </div>
-                <i class='fas fa-refresh' style="color:#000 ;"></i>
-                <div class="chat-popup card mb-4 chat-part" id="myForm" >
-                    <div><h4>Chat</h4></div>
-                    <ul>
-                        <?php 
-                            if ($count3 > 0) {
-                                while ($row4 = $result4->fetch_assoc()) {
-                                    ?> 
+                <!-- message -->
+                <?php if ($row['accept']==1) { ?>
+                <div class="chat-popup card mb-4 chat-part" id="myForm">
+                    <div style="padding:5px ;">
+                        <h4 style="display:inline-block ;">Chat</h4>
+                        <a class="btn" style="float:right ;" href="">Refresh Message</a>
+                        <hr>
+                    </div>
+                    <ul style="background-color: grey;overflow:scroll; height:300px;">
+                        <?php
+                        if ($count3 > 0) {
+                            while ($row4 = $result4->fetch_assoc()) {
+                        ?>
                                 <li>
                                     <div class="main-msg">
-                                    <?php if ($row4['role'] == $role) { ?>
-                                        <div class="ind-msg">
-                                        <?php }else{ ?>
-                                        <div class="ind-msg ind-right">
-                                        <?php } ?>    
-                                            <p><?php echo $row4['message'] ?></p> 
-                                        </div>
-                                    </div>
+                                        <?php if ($row4['role'] == $role) { ?>
+                                            <div class="ind-msg" style="float:right">
+                                                <p style="color:#000; text-align:right"><?php echo $row2['fullName'] ?></p>
+                                                <hr style="margin-top: 0px;">
+                                                <p style="text-align:right ;"><?php echo $row4['message'] ?></p>
+                                            <?php } else { ?>
+                                                <div class="ind-msg ind-right">
+                                                    <p style=" ;color:#000"><?php echo $row3['fullName'] ?></p>
+                                                    <hr>
+                                                    <p ><?php echo $row4['message'] ?></p>
+                                                </div>
+                                                <?php } ?>
+                                            </div>
                                 </li>
-                                <?php
-                                }
+                        <?php
                             }
+                        }
                         ?>
                     </ul>
                     <form method="post" action="booking-detail.php?id=<?php echo $id ?>" class="form-container">
                         <label for="msg"><b>Message</b></label>
                         <textarea placeholder="Type message.." name="msg" required></textarea>
 
-                        <button type="submit" name ="submit" class="btn">Send</button>
+                        <button type="submit" name="submit" class="btn">Send</button>
                         <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
                     </form>
                 </div>
+                <?php } ?>
             </div>
-        </div>  
+        </div>
     </div>
 </div>
 
 <style>
-    ul{
+    ul {
         list-style-type: none;
+        padding: 2px;
     }
-    .chat-history{
+
+    .chat-history {
         border: 1px solid black;
         position: relative;
     }
-    .main-msg{
+
+    .main-msg {
         width: 100%;
     }
-    .ind-msg{
-        width: 80%;
+
+    .ind-msg {
+        /* width: 90%; */
         background: #6c757d;
         color: white;
         padding: 7px;
         border-radius: 11px;
         margin: 8px 5px;
+        float: left;
     }
-    .ind-right{
+    .ind-left{
+        width: 80%;
+    }
+
+    .ind-right {
         background: #136ebf;
+        width: 80%;
+        float:left;
     }
+
     .card {
         box-shadow: 0 20px 27px 0 rgb(0 0 0 / 5%);
     }
@@ -228,76 +253,79 @@
     }
 
 
-    .chat-part{box-sizing: border-box;}
+    .chat-part {
+        box-sizing: border-box;
+    }
 
     /* Button used to open the chat form - fixed at the bottom of the page */
     .open-button {
-    background-color: #555;
-    color: white;
-    padding: 16px 20px;
-    border: none;
-    cursor: pointer;
-    opacity: 0.8;
-    position: fixed;
-    bottom: 23px;
-    right: 28px;
-    width: 280px;
+        background-color: #555;
+        color: white;
+        padding: 16px 20px;
+        border: none;
+        cursor: pointer;
+        opacity: 0.8;
+        position: fixed;
+        bottom: 23px;
+        right: 28px;
+        width: 280px;
     }
 
     /* The popup chat - hidden by default */
     .form-popup {
-    display: none;
-    position: fixed;
-    bottom: 0;
-    right: 15px;
-    border: 3px solid #f1f1f1;
-    z-index: 9;
+        display: none;
+        position: fixed;
+        bottom: 0;
+        right: 15px;
+        border: 3px solid #f1f1f1;
+        z-index: 9;
     }
 
     /* Add styles to the form container */
     .form-container {
-    max-width: 300px;
-    padding: 10px;
-    background-color: white;
+        max-width: 300px;
+        padding: 10px;
+        background-color: white;
     }
 
     /* Full-width textarea */
     .form-container textarea {
-    width: 100%;
-    padding: 15px;
-    margin: 5px 0 22px 0;
-    border: none;
-    background: #f1f1f1;
-    resize: none;
-    min-height: 200px;
+        width: 100%;
+        padding: 15px;
+        margin: 5px 0 22px 0;
+        border: none;
+        background: #f1f1f1;
+        resize: none;
+        min-height: 200px;
     }
 
     /* When the textarea gets focus, do something */
     .form-container textarea:focus {
-    background-color: #ddd;
-    outline: none;
+        background-color: #ddd;
+        outline: none;
     }
 
     /* Set a style for the submit/login button */
     .form-container .btn {
-    background-color: #04AA6D;
-    color: white;
-    padding: 16px 20px;
-    border: none;
-    cursor: pointer;
-    width: 100%;
-    margin-bottom:10px;
-    opacity: 0.8;
+        background-color: #04AA6D;
+        color: white;
+        padding: 16px 20px;
+        border: none;
+        cursor: pointer;
+        width: 100%;
+        margin-bottom: 10px;
+        opacity: 0.8;
     }
 
     /* Add a red background color to the cancel button */
     .form-container .cancel {
-    background-color: red;
+        background-color: red;
     }
 
     /* Add some hover effects to buttons */
-    .form-container .btn:hover, .open-button:hover {
-    opacity: 1;
+    .form-container .btn:hover,
+    .open-button:hover {
+        opacity: 1;
     }
 </style>
 <!--scripts for chatting--->
