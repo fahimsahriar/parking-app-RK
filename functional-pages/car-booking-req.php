@@ -4,26 +4,13 @@
         header('location: login.php');
         die();
     }
-    if ($_SESSION['ROLE'] == '2') {
+    if ($_SESSION['ROLE'] == '1') {
         header('location: logout.php');
         die();
     }
-    $location = '';
-    $space = '';
     $username = $_SESSION['username'];
 
-    if (isset($_POST['submit'])) {
-        $location = $_POST['location'];
-        $space = $_POST['space'];
-
-        $sql = "INSERT INTO active (location, space, username ) VALUES ('$location ', '$space','$username ')";
-        $conn->query($sql);
-        header('location: g-owner_page.php');
-    }
-    $sql2 = "SELECT user_detail.fullName, active.location, active.space,active.id FROM active JOIN user_detail ON user_detail.username=active.username WHERE active.username='$username' ORDER BY date DESC";
-    $result2 = $conn->query($sql2);
-    $count2 = mysqli_num_rows($result2);
-    $sql2 = "SELECT * FROM bookings JOIN user_detail on bookings.renter = user_detail.username  WHERE user_detail.username='$username' AND bookings.complete<>'2'";
+    $sql2 = "SELECT * FROM bookings JOIN user_detail ON user_detail.username=bookings.renter WHERE customer='$username' ORDER BY date DESC";
     $result3 = $conn->query($sql2);
     $count3 = mysqli_num_rows($result3);
 ?>
@@ -32,47 +19,11 @@
 
 <div class="container">
     <div class="container-xl px-4 mt-4">
-        <h3 style="margin-top: 10px; display:inline-block">Dashboard</h3>
-        <a style="float:right ;" class="btn btn-primary" href="new-advertise.php">Create A New Advertise</a>
-        <hr class="mt-0 mb-4">
-        <div class="row">
-            <div class="col-lg-4 mb-4">
-                <!-- Billing card 1-->
-                <div class="card h-100 border-start-lg border-start-primary">
-                    <div class="card-body">
-                        <div class="text-muted h4"><?php echo $count2 ?> Running</div>
-                        <div class="h3">Advertisement</div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 mb-4">
-                <!-- Billing card 2-->
-                <div class="card h-100 border-start-lg border-start-secondary">
-                    <div class="card-body">
-                        <div class="text-muted h4"><?php echo $count3 ?> Running</div>
-                        <div class="h3">Rent</div>
-                        <a class="text-arrow-icon small text-secondary" href="garage_owner_profile.php">
-                            See Rents
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 mb-4">
-                <!-- Billing card 3-->
-                <div class="card h-100 border-start-lg border-start-success">
-                    <div class="card-body">
-                        <div class="text-muted h4">8 Booking</div>
-                        <div class="h3 d-flex align-items-center">Request</div>
-                        <a class="text-arrow-icon small text-secondary" href="booking-request.php">
-                            See Rents
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <h3 style="margin-top: 10px; display:inline-block">Booking Requests</h3>
+        <hr>
         <!-- Billing history card-->
         <div class="card mb-4">
-            <div class="card-header">Advertisement History</div>
+            <div class="card-header">Request history</div>
             <div class="card-body p-0">
                 <!-- Billing history table-->
                 <div class="table-responsive table-billing-history">
@@ -81,22 +32,33 @@
                             <tr>
                                 <th class="border-gray-200" scope="col">ID</th>
                                 <th class="border-gray-200" scope="col">Location</th>
+                                <th class="border-gray-200" scope="col">Date</th>
                                 <th class="border-gray-200" scope="col">Space</th>
-                                <th class="border-gray-200" scope="col">Edit</th>
+                                <th class="border-gray-200" scope="col">Status</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <?php if ($count2 > 0) { ?>
-                            <?php while ($row = $result2->fetch_assoc()) { ?>
+                            <?php if ($count3 > 0) { ?>
+                            <?php while ($row = $result3->fetch_assoc()) { ?>
                             <tr>
-                                <td>#ad-id-<?php echo $row['id'] ?></td>
+                                <td> <a href="booking-detail.php?id=<?php echo $row['id'] ?>">#bk-id-<?php echo $row['id'] ?></a></td>
                                 <td> <?php echo $row['location'] ?></td>
+                                <td><?php echo $row['date'] ?></td>
                                 <td><?php echo $row['space'] ?> car</td>
                                 <td>
-                                    <span class="badge bg-light text-dark">
-                                        <a class="" href="edit.php?id=<?php echo $row['id'] ?>" role="button">Click to edit</a>  /
-                                        <a style="color:red;" href="delete.php?id=<?php echo $row['id'] ?>" role="button">Delete</a>
-                                    </span>
+                                    <?php if ($row['accept']==1) { ?>
+                                        <span class="badge bg-light text-success">
+                                            Accepted
+                                        </span>
+                                    <?php }elseif ($row['accept']==0) { ?>
+                                        <span class="badge bg-light text-primary">
+                                            Pending
+                                        </span>
+                                    <?php }else{ ?>
+                                        <span class="badge bg-light text-danger">
+                                            Rejected
+                                        </span>
+                                    <?php } ?>
                                 </td>
                             </tr>
                             <?php }} ?>

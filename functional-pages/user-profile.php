@@ -1,32 +1,28 @@
 <?php require 'C:\xampp\htdocs\Dhaka-Parking\header.php'; ?>
 <?php
-if (!isset($_SESSION['isLogin'])) {
-    header('location: login.php');
-    die();
-}
-if ($_SESSION['ROLE'] == '1') {
-    header('location: logout.php');
-    die();
-}
+    if (!isset($_SESSION['isLogin'])) {
+        header('location: login.php');
+        die();
+    }
+    $username = $_GET['username'];
 ?>
 <link rel="stylesheet" href="style_user.css">
 
 <?php
-$sql1 = "SELECT * FROM user_detail WHERE fullName='$customer_name'";
-$result1 = $conn->query($sql1);
-$row1 = $result1->fetch_assoc();
+    $sql1 = "SELECT * FROM user_detail WHERE username='$username'";
+    $result1 = $conn->query($sql1);
+    $row1 = $result1->fetch_assoc();
 
-$customer_username = $row1['username'];
-//echo $customer_username ;
-
-$sql2 = "SELECT * FROM bookings WHERE customer='$customer_username' AND complete='2' ORDER BY date DESC";
-$result2 = $conn->query($sql2);
-$count2 = mysqli_num_rows($result2);
-
-$sql3 = "SELECT * FROM bookings JOIN user_detail ON bookings.renter = user_detail.username WHERE customer='$customer_username' AND bookings.complete<'2' ORDER BY date DESC";
-$result3 = $conn->query($sql3);
-$count3 = mysqli_num_rows($result3);
-?>
+    if($row1['role1'] == 1)
+    {
+        $sql2 = "SELECT * FROM bookings JOIN user_detail on bookings.renter = user_detail.username  WHERE user_detail.username='$username' AND bookings.complete='2' ORDER BY date DESC";
+    }else{
+        $sql2 = "SELECT * FROM bookings JOIN user_detail on bookings.customer = user_detail.username  WHERE user_detail.username='$username' AND bookings.complete='2' ORDER BY date DESC";
+    }
+    
+    $result2 = $conn->query($sql2);
+    $count2 = mysqli_num_rows($result2);
+    ?>
 <div class="container">
     <div class="main-body">
         <div class="row gutters-sm">
@@ -36,14 +32,17 @@ $count3 = mysqli_num_rows($result3);
                         <div class="d-flex flex-column align-items-center text-center">
                             <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin" class="rounded-circle" width="150">
                             <div class="mt-3">
-                                <h4><?php echo $customer_name ?></h4>
+                                <h4><?php echo $row1['fullName'] ?></h4>
                                 <p class="text-secondary mb-1"><?php print ($row1['role1'] == 1) ? 'Parking Owner' : 'Car Owner' ?></p>
                                 <p class="text-muted font-size-sm">Completed Booking: <?php echo $count2 ?></p>
+                                <p>Rating: <?php echo $row1['rating'] ?><i class="fa fa-star"></i></p>
                                 <hr>
                                 <p class="text-muted font-size-sm">Email: fip@jukmuh.al</p>
                                 <p class="text-muted font-size-sm">Phone: <?php echo $row1['phone'] ?></p>
+                                <?php if($row1['role1'] == 2) {?>
                                 <p class="text-muted font-size-sm">Car Name: <?php echo $row1['Car_Name'] ?></p>
                                 <p class="text-muted font-size-sm">Car Model: <?php echo $row1['Model'] ?></p>
+                                <?php } ?>
                                 <p class="text-muted font-size-sm">Address: <?php echo $row1['address'] ?></p>
                             </div>
                         </div>
@@ -51,33 +50,6 @@ $count3 = mysqli_num_rows($result3);
                 </div>
             </div>
             <div class="col-md-8">
-                <div class="card" style="margin-bottom: 10px ;">
-                    <div class="card-cody m-3">
-                        <h5 style='font-weight:300;text-decoration:underline'>Running Rent</h5>
-                        <?php if ($count3 > 0) { ?>
-                            <?php while ($row2 = $result3->fetch_assoc()) { ?>
-                                <div class="" style="background:#dec780;padding:20px; margin-bottom:15px;">
-                                    <h5 style='font-weight:500;'><a style="color:#000;" href="booking-detail.php?id=<?php echo $row2['id'] ?> ">bk-id-<?php echo $row2['id'] ?></a></h5>
-                                    <p class="">Location: <?php echo $row2['location'] ?> | Car: <?php echo $row2['space'] ?></p>
-
-                                    <hr class="my-4">
-                                    <p class="">Date: <?php echo $row2['date'] ?></p>
-                                    <?php if ($row2['complete']==0) { ?>
-                                    <p class="">
-                                        <a class="btn btn-success btn" href="complete.php?id=<?php echo $row2['id'] ?>&step=1" role="button">Marked as complete</a>
-                                    </p>
-                                    <?php } ?>
-                                </div>
-                            <?php } ?>
-                        <?php } else { ?>
-                            <div class="jumbotron jumbotron-fluid">
-                                <div class="container">
-                                    <h5 class="">No Running Rent</h5>
-                                </div>
-                            </div>
-                        <?php } ?>
-                    </div>
-                </div>
                 <div class="card mt-10">
                     <div class="card-cody m-3 mt-0">
                         <h5 style='font-weight:300;text-decoration:underline'>Completed Bookings </h5>
@@ -165,6 +137,4 @@ $count3 = mysqli_num_rows($result3);
         box-shadow: none !important;
     }
 </style>
-
-
 <?php require 'C:\xampp\htdocs\Dhaka-Parking\footer.php'; ?>
