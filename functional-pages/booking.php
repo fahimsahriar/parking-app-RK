@@ -1,5 +1,5 @@
-<?php require 'C:\xampp\htdocs\Dhaka-Parking\header.php'; ?>
-<?php include_once 'C:\xampp\htdocs\Dhaka-Parking\db_connect.php';
+<?php require '../header.php'; ?>
+<?php include_once '../db_connect.php';
 $renter_username = $_GET['renter_username'];
 $customer_username = $_GET['customer_username'];
 $g_name = $_GET['g_name'];
@@ -175,6 +175,6 @@ if (isset($_POST['submit'])) {
         margin: 0;
     }
 </style>
-<?php require 'C:\xampp\htdocs\Dhaka-Parking\footer.php'; ?>
+<?php require '../footer.php'; ?>
 
 <script src="../js/booking.js"></script>

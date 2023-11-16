@@ -1,4 +1,4 @@
-<?php require 'C:\xampp\htdocs\Dhaka-Parking\header.php'; ?>
+<?php require '../header.php'; ?>
 <?php
 if (!isset($_SESSION['isLogin'])) {
     header('location: login.php');
@@ -167,4 +167,4 @@ $count3 = mysqli_num_rows($result3);
 </style>
 
 
-<?php require 'C:\xampp\htdocs\Dhaka-Parking\footer.php'; ?>
+<?php require '../footer.php'; ?>

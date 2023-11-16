@@ -1,4 +1,4 @@
-<?php require 'C:\xampp\htdocs\Dhaka-Parking\header.php'; ?>
+<?php require '../header.php'; ?>
 <?php
     if(!isset($_SESSION['isLogin'])){
         header('location: login.php');
@@ -38,4 +38,4 @@
         <button type="submit" name="submit" class="btn btn-primary">Edit</button>
     </form>
 </div>
-<?php require 'C:\xampp\htdocs\Dhaka-Parking\footer.php'; ?>
+<?php require '../footer.php'; ?>
