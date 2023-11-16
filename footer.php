@@ -2,7 +2,7 @@
       <div class="foot" style="padding:20px;" >
         <p style="text-align: center;color:gray">
             <small>Thank you</small> <br>
-            <small>All right rserves to us</small>
+            <small>©️Fahim Sahriar</small>
         </p>
       </div>
     </div>

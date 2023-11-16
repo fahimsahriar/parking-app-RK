@@ -35,7 +35,7 @@ if (!isset($_SESSION['isLogin'])) {
 
   <!--Nav bar-->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" href="/Dhaka-Parking/index.php">Smart<span style="color:#f1e129;font-weight:800">Parking</span></a>
+    <a class="navbar-brand" href="../index.php">Smart<span style="color:#f1e129;font-weight:800">Parking</span></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -58,8 +58,8 @@ if (!isset($_SESSION['isLogin'])) {
               <a class="dropdown-item" href="/Dhaka-parking/functional-pages/car-booking-req.php">Booking Request</a>
             <?php endif ?>
             <?php if (!(isset($_SESSION['isLogin']))) : ?>
-              <a class="dropdown-item" href="/Dhaka-parking/functional-pages/login-car.php">Car Owner login</a>
-              <a class="dropdown-item" href="/Dhaka-parking/functional-pages/login-parking.php">Parking Owner login</a>
+              <a class="dropdown-item" href="../functional-pages/login-car.php">Car Owner login</a>
+              <a class="dropdown-item" href="../functional-pages/login-parking.php">Parking Owner login</a>
             <?php elseif (isset($_SESSION['isLogin'])) : ?>
               <div class="dropdown-divider"></div>
               <a class="dropdown-item" style="color:red" href="/Dhaka-parking/functional-pages/logout.php">Logout</a>

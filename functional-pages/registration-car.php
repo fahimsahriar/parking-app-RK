@@ -1,5 +1,5 @@
-<?php require 'C:\xampp\htdocs\Dhaka-Parking\header.php'; ?>
-<?php require 'C:\xampp\htdocs\Dhaka-Parking\db_connect.php'; ?>
+<?php require '../header.php'; ?>
+<?php require '../db_connect.php'; ?>
 <?php
 $username = '';
 $password = '';
@@ -52,7 +52,7 @@ if (isset($_POST['submit'])) {
             </div>
             <div class="form-group col-md-6">
                 <label for="inputEmail4">Car Name <small>(Not required for garage owner)</small></label>
-                <input type="username" name="Car_Name" class="form-control" id="inputEmail4" placeholder="Car Name"">
+                <input type="username" name="Car_Name" class="form-control" id="inputEmail4" placeholder="Car Name">
             </div>
             <div class=" form-group col-md-6">
                 <label for="inputEmail4">Model <small>(Not required for garage owner)</small></label>
@@ -75,4 +75,4 @@ if (isset($_POST['submit'])) {
         <button type="submit" class="btn btn-success" name="submit">Sign Up</button>
     </form>
 </div>
-<?php require 'C:\xampp\htdocs\Dhaka-Parking\footer.php'; ?>
+<?php require '../footer.php'; ?>
