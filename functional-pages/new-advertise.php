@@ -1,4 +1,4 @@
-<?php require 'C:\xampp\htdocs\Dhaka-Parking\header.php'; ?>
+<?php require '../header.php'; ?>
 <?php
     if (!isset($_SESSION['isLogin'])) {
         header('location: login.php');

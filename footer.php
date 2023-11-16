@@ -1,4 +1,4 @@
-    <div id="" style="background:#343A40;">
+    <div id="" style="background:#343A40;height:110px">
       <div class="foot" style="padding:20px;" >
         <p style="text-align: center;color:gray">
             <small>Thank you</small> <br>

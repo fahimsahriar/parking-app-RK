@@ -1,5 +1,5 @@
 <?php 
-    require 'C:\xampp\htdocs\Dhaka-Parking\header.php';
+    require '../header.php';
     if (!isset($_SESSION['isLogin'])) {
         header('location: login.php');
         die();
@@ -162,4 +162,4 @@
         box-shadow: none !important;
     }
 </style>
-<?php require 'C:\xampp\htdocs\Dhaka-Parking\footer.php'; ?>
+<?php require '../footer.php'; ?>

@@ -1,4 +1,4 @@
-<?php require 'C:\xampp\htdocs\Dhaka-Parking\header.php'; ?>
+<?php require '../header.php'; ?>
 <?php
 if (!isset($_SESSION['isLogin'])) {
     header('location: login.php');
@@ -43,7 +43,7 @@ if (isset($_POST['submit'])) {
 }
 ?>
 
-<div class="container" style="margin-bottom: 80px;">
+<div class="container" style="margin-bottom: 80px;min-height:calc(100vh - 240px);">
     <div class="feedback" style="margin-top: 30px;">
         <h4>Rate and complete the booking</h4>
         <hr>
@@ -68,4 +68,4 @@ if (isset($_POST['submit'])) {
         <button type="submit" name="submit" class="btn btn-danger">YES</button>
     </form>-->
 </div>
-<?php require 'C:\xampp\htdocs\Dhaka-Parking\footer.php'; ?>
+<?php require '../footer.php'; ?>

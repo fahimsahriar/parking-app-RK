@@ -1,5 +1,5 @@
 <?php
-    require 'C:\xampp\htdocs\Dhaka-Parking\header.php';
+    require '../header.php';
     if (!isset($_SESSION['isLogin'])) {
         header('location: login.php');
         die();
@@ -51,7 +51,7 @@
                     <div class="card-body">
                         <div class="text-muted h4"><?php echo $count3 ?> Running</div>
                         <div class="h3">Rent</div>
-                        <a class="text-arrow-icon small text-secondary" href="garage_owner_profile.php">
+                        <a class="text-arrow-icon small text-secondary" href="./garage_owner_profile.php">
                             See Rents
                         </a>
                     </div>
@@ -63,7 +63,7 @@
                     <div class="card-body">
                         <div class="text-muted h4">8 Booking</div>
                         <div class="h3 d-flex align-items-center">Request</div>
-                        <a class="text-arrow-icon small text-secondary" href="booking-request.php">
+                        <a class="text-arrow-icon small text-secondary" href="./booking-request.php">
                             See Rents
                         </a>
                     </div>
@@ -217,4 +217,4 @@
         height: 100% !important;
     }
 </style>
-<?php require 'C:\xampp\htdocs\Dhaka-Parking\footer.php'; ?>
+<?php require '../footer.php'; ?>

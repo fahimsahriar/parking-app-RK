@@ -1,5 +1,5 @@
 <?php
-    require 'C:\xampp\htdocs\Dhaka-Parking\header.php';
+    require '../header.php';
     if (!isset($_SESSION['isLogin'])) {
         header('location: login.php');
         die();
@@ -92,7 +92,7 @@
                             <tr>
                                 <td>#bk-id-<?php echo $row['id'] ?></td>
                                 <td> <?php echo $row['location'] ?></td>
-                                <td><a href="../functional-pages/user-profile.php?username=<?php echo $row['customer'] ?>">Click to See</a></td>
+                                <td><a href="./user-profile.php?username=<?php echo $row['customer'] ?>">Click to See</a></td>
                                 <td><?php echo $row['space'] ?> car</td>
                                 <td>
                                     <span class="badge bg-light text-dark">
@@ -221,4 +221,4 @@
         height: 100% !important;
     }
 </style>
-<?php require 'C:\xampp\htdocs\Dhaka-Parking\footer.php'; ?>
+<?php require '../footer.php'; ?>
