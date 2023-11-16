@@ -1,5 +1,5 @@
-<?php require 'C:\xampp\htdocs\Dhaka-Parking\header.php'; ?>
-<?php require 'C:\xampp\htdocs\Dhaka-Parking\db_connect.php'; ?>
+<?php require '../header.php'; ?>
+<?php require '../db_connect.php'; ?>
 <?php
 $username = '';
 $password = '';
@@ -60,4 +60,4 @@ if (isset($_POST['submit'])) {
         <button type="submit" class="btn btn-success" name="submit">Sign Up</button>
     </form>
 </div>
-<?php require 'C:\xampp\htdocs\Dhaka-Parking\footer.php'; ?>
+<?php require '../footer.php'; ?>

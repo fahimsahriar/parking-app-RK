@@ -1,4 +1,4 @@
-<?php require 'C:\xampp\htdocs\Dhaka-Parking\header.php'; ?>
+<?php require '../header.php'; ?>
 <?php
 $error = '';
 if (isset($_POST['submit'])) {
@@ -40,7 +40,7 @@ if (isset($_POST['submit'])) {
         <button type="submit" class="btn btn-success" name="submit">Login</button>
         <p><?php echo "$error" ?></p>
         <hr>
-        <p><a href="../functional-pages/registration-parking.php">Create New Account</a></p>
+        <p><a href="./registration-parking.php">Create New Account</a></p>
     </form>
 </div>
-<?php require 'C:\xampp\htdocs\Dhaka-Parking\footer.php'; ?>
+<?php require '../footer.php'; ?>

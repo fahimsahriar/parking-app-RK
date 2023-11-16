@@ -1,4 +1,4 @@
-<?php require 'C:\xampp\htdocs\Dhaka-Parking\header.php'; ?>
+<?php require '../header.php'; ?>
 <?php
 $error = '';
 
@@ -44,4 +44,4 @@ if (isset($_POST['submit'])) {
         <p><a href="../functional-pages/registration-car.php">Create New Account</a></p>
     </form>
 </div>
-<?php require 'C:\xampp\htdocs\Dhaka-Parking\footer.php'; ?>
+<?php require '../footer.php'; ?>
